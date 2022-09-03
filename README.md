@@ -26,10 +26,10 @@ The app defines following CRUD APIs.
 
 ### Customer
 
-| Method | Url                                                         | Decription                                   | Sample Valid Request Body | 
-|--------|-------------------------------------------------------------|----------------------------------------------| --------------------------- |
-| POST   | /api/v1/customers                                           | Create Customer                              | [JSON](#signup) |
-| GET    | /api/v1/customers                                           | Get Customers                                | [JSON](#signin) |
-| GET    | /api/v1/customers/{id}                                      | Get Customers By cusromer Id                 | [JSON](#signin) |
-| PATCH  | /api/v1/customers/{id}/phone-details/{phoneDetailId}/status | Activate Or Decativate Customer Phone Number | [JSON](#signin) |
+| Method | Url                                                         | Decription                                   | 
+|--------|-------------------------------------------------------------|----------------------------------------------| 
+| POST   | /api/v1/customers                                           | Create Customer                              |
+| GET    | /api/v1/customers                                           | Get Customers                                | 
+| GET    | /api/v1/customers/{id}                                      | Get Customers By cusromer Id                 | 
+| PATCH  | /api/v1/customers/{id}/phone-details/{phoneDetailId}/status | Activate Or Decativate Customer Phone Number |
 
