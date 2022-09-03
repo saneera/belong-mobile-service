@@ -53,13 +53,13 @@ public class CustomerController {
     }
 
 
-    @PatchMapping("/customers/{id}/phone-numbers/{phoneId}/status")
+    @PatchMapping("/customers/{id}/phone-details/{phoneDetailId}/status")
     public PhoneDetailDto updatePhoneStatus(
             @PathVariable @NotNull Long id,
-            @PathVariable @NotNull Long phoneId,
+            @PathVariable @NotNull Long phoneDetailId,
             @Valid @RequestBody StatusUpdateDto status
     ) {
-        return customerService.updatePhoneStatus(id, phoneId, status);
+        return customerService.updatePhoneStatus(id, phoneDetailId, status);
     }
 
 }

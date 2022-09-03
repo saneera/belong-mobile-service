@@ -34,19 +34,19 @@ Feature: Customer Test
             "id": 7,
             "customerId": 3,
             "phoneNumber": "0491570159",
-            "status": "INACTIVE"
+            "status": "Inactive"
         },
         {
             "id": 8,
             "customerId": 3,
             "phoneNumber": "0491570152",
-            "status": "ACTIVE"
+            "status": "Active"
         },
         {
             "id": 9,
             "customerId": 3,
             "phoneNumber": "0491570153",
-            "status": "INACTIVE"
+            "status": "Inactive"
         }
      ]
     }
@@ -66,11 +66,11 @@ Feature: Customer Test
     """
 
   Scenario: active Phone number
-    Given url customerUrl+'/3/phone-numbers/9/status'
+    Given url customerUrl+'/3/phone-details/9/status'
     And request
     """
     {
-      "status" : "ACTIVE"
+      "status" : "Active"
     }
     """
     When method PATCH
@@ -81,16 +81,16 @@ Feature: Customer Test
         "id": 9,
         "customerId": 3,
         "phoneNumber": "0491570153",
-        "status": "ACTIVE"
+        "status": "Active"
     }
     """
 
   Scenario: active Phone number not found
-    Given url customerUrl+'/3/phone-numbers/10/status'
+    Given url customerUrl+'/3/phone-details/10/status'
     And request
     """
     {
-      "status" : "ACTIVE"
+      "status" : "Active"
     }
     """
     When method PATCH
@@ -100,7 +100,7 @@ Feature: Customer Test
    {
        "statusCode":404,
        "message":"Not found Phone with id = 10",
-       "description":"uri=/api/v1/customers/3/phone-numbers/10/status"
+       "description":"uri=/api/v1/customers/3/phone-details/10/status"
     }
     """
 
@@ -115,7 +115,7 @@ Feature: Customer Test
      "phoneDetails": [
      {
             "phoneNumber": "0425429308",
-            "status": "ACTIVE"
+            "status": "Active"
        }
      ]
     }
@@ -133,7 +133,7 @@ Feature: Customer Test
            "id":20,
            "phoneNumber":"0425429308",
            "customerId":12,
-           "status":"ACTIVE"
+           "status":"Active"
         }
       ]
     }
