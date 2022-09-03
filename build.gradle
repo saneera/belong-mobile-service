@@ -23,15 +23,21 @@ dependencies {
 
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.5'
     runtimeOnly 'com.h2database:h2'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'com.intuit.karate:karate-junit5:1.0.1'
     testImplementation 'com.intuit.karate:karate-apache:0.9.6'
 }
 
-tasks.named('test') {
+test {
     useJUnitPlatform()
+    afterSuite { desc, result ->
+        if (!desc.parent)
+            println("${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} passed, ${result.failedTestCount} failed, ${result.skippedTestCount} skipped)")
+    }
 }
+
 
 
 test {
