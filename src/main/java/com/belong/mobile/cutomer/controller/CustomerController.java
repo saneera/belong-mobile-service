@@ -53,7 +53,7 @@ public class CustomerController {
 
     @PutMapping("/customers/{id}")
     @Operation(
-            summary = "Create new or update existing customer",
+            summary = "Update existing customer",
             description = "Updates existing customer. Returns updated customer")
     public CustomerDto updateCustomer(
             @PathVariable @NotNull Long id,

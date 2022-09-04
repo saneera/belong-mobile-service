@@ -16,7 +16,7 @@ git clone https://github.com/saneera/belong-mobile-service.git
 **3. Run the app using gradle**
 
 ```bash
-./gradlew spring-boot:run
+./gradlew bootRun
 ```
 The app will start running at <http://localhost:8080>
 

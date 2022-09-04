@@ -2,6 +2,7 @@ package com.belong.mobile.cutomer.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Entity
 @Table(name = "phone_details", uniqueConstraints = @UniqueConstraint(columnNames = {"customer_id", "id"}))
@@ -67,5 +68,18 @@ public class PhoneDetail {
 
     public void setVersion(Long version) {
         this.version = version;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PhoneDetail that = (PhoneDetail) o;
+        return Objects.equals(id, that.id) && Objects.equals(customerId, that.customerId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, customerId);
     }
 }

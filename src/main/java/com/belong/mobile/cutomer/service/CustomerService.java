@@ -90,7 +90,7 @@ public class CustomerService {
                 .orElseThrow(() -> new NotFoundException("Not found Phone with id = " + phoneId));
 
         phoneNumber.setStatus(status.getStatus());
-        phoneDetailRepository.save(phoneNumber);
+        phoneNumber = phoneDetailRepository.save(phoneNumber);
         return modelMapper.map(phoneNumber, PhoneDetailDto.class);
     }
 
@@ -104,10 +104,16 @@ public class CustomerService {
 
     private CustomerDto convertToCustomerDto(Customer customer) {
         CustomerDto customerDto = modelMapper.map(customer, CustomerDto.class);
-        List<PhoneDetailDto> phoneDetails = phoneDetailRepository.findByCustomerId(customer.getId()).stream().map(row -> {
-            return modelMapper.map(row, PhoneDetailDto.class);
-        }).collect(Collectors.toList());
-        customerDto.setPhoneDetails(phoneDetails);
+        Optional<List<PhoneDetail>> phoneDetailsList = phoneDetailRepository.findByCustomerId(customer.getId());
+        if (phoneDetailsList.isPresent()) {
+            List<PhoneDetailDto> phoneDetails = phoneDetailsList.get().stream().map(row -> {
+                return modelMapper.map(row, PhoneDetailDto.class);
+            }).collect(Collectors.toList());
+            customerDto.setPhoneDetails(phoneDetails);
+        } else {
+            customerDto.setPhoneDetails(null);
+        }
+
         return customerDto;
     }
 

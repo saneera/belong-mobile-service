@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.6.2'
     id 'io.spring.dependency-management' version '1.0.13.RELEASE'
     id 'java'
+    id 'groovy'
 }
 
 group = 'com.belong.mobile'
@@ -51,7 +52,9 @@ test {
     systemProperty "karate.env", System.properties.getProperty("karate.env")
     outputs.upToDateWhen { false }
     testLogging.showStandardStreams = true
+
 }
+
 
 sourceSets {
     test {
@@ -62,3 +65,5 @@ sourceSets {
 
     }
 }
+
+
