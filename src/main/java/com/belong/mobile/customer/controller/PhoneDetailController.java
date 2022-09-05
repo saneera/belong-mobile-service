@@ -1,9 +1,9 @@
-package com.belong.mobile.cutomer.controller;
+package com.belong.mobile.customer.controller;
 
-import com.belong.mobile.cutomer.dto.PhoneDetailDto;
-import com.belong.mobile.cutomer.dto.SearchCriteria;
-import com.belong.mobile.cutomer.dto.StatusUpdateDto;
-import com.belong.mobile.cutomer.service.PhoneDetailService;
+import com.belong.mobile.customer.dto.PhoneDetailDto;
+import com.belong.mobile.customer.dto.SearchCriteria;
+import com.belong.mobile.customer.dto.StatusUpdateDto;
+import com.belong.mobile.customer.service.PhoneDetailService;
 import com.sun.istack.NotNull;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;

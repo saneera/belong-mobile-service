@@ -1,6 +1,6 @@
-package com.belong.mobile.cutomer.repository;
+package com.belong.mobile.customer.repository;
 
-import com.belong.mobile.cutomer.domain.Customer;
+import com.belong.mobile.customer.domain.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

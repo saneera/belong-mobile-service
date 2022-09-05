@@ -1,12 +1,12 @@
-package com.belong.mobile.cutomer.service;
+package com.belong.mobile.customer.service;
 
 import com.belong.mobile.common.PaginationUtil;
-import com.belong.mobile.cutomer.domain.PhoneDetail;
-import com.belong.mobile.cutomer.dto.PhoneDetailDto;
-import com.belong.mobile.cutomer.dto.SearchCriteria;
-import com.belong.mobile.cutomer.dto.StatusUpdateDto;
-import com.belong.mobile.cutomer.repository.PhoneDetailRepository;
-import com.belong.mobile.cutomer.specification.PhoneSpecification;
+import com.belong.mobile.customer.domain.PhoneDetail;
+import com.belong.mobile.customer.dto.PhoneDetailDto;
+import com.belong.mobile.customer.dto.SearchCriteria;
+import com.belong.mobile.customer.dto.StatusUpdateDto;
+import com.belong.mobile.customer.repository.PhoneDetailRepository;
+import com.belong.mobile.customer.specification.PhoneSpecification;
 import com.belong.mobile.exception.NotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

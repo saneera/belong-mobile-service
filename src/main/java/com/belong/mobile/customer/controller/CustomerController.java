@@ -1,8 +1,8 @@
-package com.belong.mobile.cutomer.controller;
+package com.belong.mobile.customer.controller;
 
-import com.belong.mobile.cutomer.dto.CustomerDto;
-import com.belong.mobile.cutomer.dto.SearchCriteria;
-import com.belong.mobile.cutomer.service.CustomerService;
+import com.belong.mobile.customer.dto.CustomerDto;
+import com.belong.mobile.customer.dto.SearchCriteria;
+import com.belong.mobile.customer.service.CustomerService;
 import com.sun.istack.NotNull;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,7 +26,7 @@ public class CustomerController {
     @Operation(
             summary = "Create Cstomer",
             description = "Returns the saved Customer ")
-    public CustomerDto createCustomer(@RequestBody CustomerDto customer) {
+    public CustomerDto createCustomer(@Valid @RequestBody CustomerDto customer) {
         return customerService.save(customer);
     }
 

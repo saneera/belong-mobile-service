@@ -1,11 +1,11 @@
 package com.belong.mobile;
 
-import com.belong.mobile.cutomer.domain.Customer;
-import com.belong.mobile.cutomer.domain.PhoneDetail;
-import com.belong.mobile.cutomer.domain.Status;
-import com.belong.mobile.cutomer.dto.CustomerDto;
-import com.belong.mobile.cutomer.dto.PhoneDetailDto;
-import com.belong.mobile.cutomer.dto.SearchCriteria;
+import com.belong.mobile.customer.domain.Customer;
+import com.belong.mobile.customer.domain.PhoneDetail;
+import com.belong.mobile.customer.domain.Status;
+import com.belong.mobile.customer.dto.CustomerDto;
+import com.belong.mobile.customer.dto.PhoneDetailDto;
+import com.belong.mobile.customer.dto.SearchCriteria;
 
 import java.util.Arrays;
 import java.util.List;

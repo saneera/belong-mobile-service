@@ -1,4 +1,4 @@
-package com.belong.mobile.cutomer.dto;
+package com.belong.mobile.customer.dto;
 
 import com.belong.mobile.common.ConstantHelper;
 

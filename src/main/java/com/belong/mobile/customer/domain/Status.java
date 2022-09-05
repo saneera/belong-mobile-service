@@ -1,4 +1,4 @@
-package com.belong.mobile.cutomer.domain;
+package com.belong.mobile.customer.domain;
 
 public enum Status {
     Active,

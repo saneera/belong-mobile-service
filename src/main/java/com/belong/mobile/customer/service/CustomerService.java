@@ -1,13 +1,13 @@
-package com.belong.mobile.cutomer.service;
+package com.belong.mobile.customer.service;
 
 import com.belong.mobile.common.PaginationUtil;
-import com.belong.mobile.cutomer.domain.Customer;
-import com.belong.mobile.cutomer.domain.PhoneDetail;
-import com.belong.mobile.cutomer.dto.CustomerDto;
-import com.belong.mobile.cutomer.dto.PhoneDetailDto;
-import com.belong.mobile.cutomer.dto.SearchCriteria;
-import com.belong.mobile.cutomer.dto.StatusUpdateDto;
-import com.belong.mobile.cutomer.repository.CustomerRepository;
+import com.belong.mobile.customer.domain.Customer;
+import com.belong.mobile.customer.domain.PhoneDetail;
+import com.belong.mobile.customer.dto.CustomerDto;
+import com.belong.mobile.customer.dto.PhoneDetailDto;
+import com.belong.mobile.customer.dto.SearchCriteria;
+import com.belong.mobile.customer.dto.StatusUpdateDto;
+import com.belong.mobile.customer.repository.CustomerRepository;
 import com.belong.mobile.exception.NotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;

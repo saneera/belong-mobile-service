@@ -1,4 +1,4 @@
-package com.belong.mobile.cutomer.dto;
+package com.belong.mobile.customer.dto;
 
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;

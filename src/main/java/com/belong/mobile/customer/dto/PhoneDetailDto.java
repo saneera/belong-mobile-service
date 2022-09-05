@@ -1,6 +1,6 @@
-package com.belong.mobile.cutomer.dto;
+package com.belong.mobile.customer.dto;
 
-import com.belong.mobile.cutomer.domain.Status;
+import com.belong.mobile.customer.domain.Status;
 
 import javax.validation.constraints.NotEmpty;
 

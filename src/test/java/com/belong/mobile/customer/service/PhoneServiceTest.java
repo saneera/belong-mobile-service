@@ -1,17 +1,10 @@
 package com.belong.mobile.customer.service;
 
-import com.belong.mobile.common.PaginationUtil;
-import com.belong.mobile.cutomer.domain.Customer;
-import com.belong.mobile.cutomer.domain.PhoneDetail;
-import com.belong.mobile.cutomer.domain.Status;
-import com.belong.mobile.cutomer.dto.CustomerDto;
-import com.belong.mobile.cutomer.dto.PhoneDetailDto;
-import com.belong.mobile.cutomer.dto.SearchCriteria;
-import com.belong.mobile.cutomer.dto.StatusUpdateDto;
-import com.belong.mobile.cutomer.repository.CustomerRepository;
-import com.belong.mobile.cutomer.repository.PhoneDetailRepository;
-import com.belong.mobile.cutomer.service.CustomerService;
-import com.belong.mobile.cutomer.service.PhoneDetailService;
+import com.belong.mobile.customer.domain.PhoneDetail;
+import com.belong.mobile.customer.domain.Status;
+import com.belong.mobile.customer.dto.PhoneDetailDto;
+import com.belong.mobile.customer.dto.StatusUpdateDto;
+import com.belong.mobile.customer.repository.PhoneDetailRepository;
 import cucumber.api.java.Before;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,8 +15,6 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 
 import java.util.Optional;
 

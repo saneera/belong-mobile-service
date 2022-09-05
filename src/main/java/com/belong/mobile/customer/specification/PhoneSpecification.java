@@ -1,6 +1,6 @@
-package com.belong.mobile.cutomer.specification;
+package com.belong.mobile.customer.specification;
 
-import com.belong.mobile.cutomer.domain.PhoneDetail;
+import com.belong.mobile.customer.domain.PhoneDetail;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.CriteriaBuilder;

@@ -327,3 +327,17 @@ Feature: Customer Test
     }
     """
 
+  Scenario: Save Customer  Error
+    Given url customerUrl
+    And request
+    """
+    {
+
+    }
+    """
+    When method POST
+    Then status 500
+
+
+
+
