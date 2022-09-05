@@ -1,10 +1,8 @@
 package com.belong.mobile.cutomer.controller;
 
-import com.belong.mobile.cutomer.dto.CustomerDto;
 import com.belong.mobile.cutomer.dto.PhoneDetailDto;
 import com.belong.mobile.cutomer.dto.SearchCriteria;
 import com.belong.mobile.cutomer.dto.StatusUpdateDto;
-import com.belong.mobile.cutomer.service.CustomerService;
 import com.belong.mobile.cutomer.service.PhoneDetailService;
 import com.sun.istack.NotNull;
 import io.swagger.v3.oas.annotations.Operation;

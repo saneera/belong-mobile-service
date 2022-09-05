@@ -1,9 +1,7 @@
 package com.belong.mobile.cutomer.controller;
 
 import com.belong.mobile.cutomer.dto.CustomerDto;
-import com.belong.mobile.cutomer.dto.PhoneDetailDto;
 import com.belong.mobile.cutomer.dto.SearchCriteria;
-import com.belong.mobile.cutomer.dto.StatusUpdateDto;
 import com.belong.mobile.cutomer.service.CustomerService;
 import com.sun.istack.NotNull;
 import io.swagger.v3.oas.annotations.Operation;
@@ -12,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController

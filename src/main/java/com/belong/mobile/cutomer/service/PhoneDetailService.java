@@ -1,9 +1,7 @@
 package com.belong.mobile.cutomer.service;
 
 import com.belong.mobile.common.PaginationUtil;
-import com.belong.mobile.cutomer.domain.Customer;
 import com.belong.mobile.cutomer.domain.PhoneDetail;
-import com.belong.mobile.cutomer.dto.CustomerDto;
 import com.belong.mobile.cutomer.dto.PhoneDetailDto;
 import com.belong.mobile.cutomer.dto.SearchCriteria;
 import com.belong.mobile.cutomer.dto.StatusUpdateDto;
@@ -60,7 +58,6 @@ public class PhoneDetailService {
     }
 
 
-
     public List<PhoneDetail> findByCustomerId(Long customerId) {
         Optional<List<PhoneDetail>> phoneDetailsList = phoneDetailRepository.findByCustomerId(customerId);
         if (phoneDetailsList.isPresent()) {
@@ -113,8 +110,6 @@ public class PhoneDetailService {
         phoneDetail = phoneDetailRepository.save(phoneDetail);
         return modelMapper.map(phoneDetail, PhoneDetailDto.class);
     }
-
-
 
 
     private PhoneDetail convertToPhoneDetail(PhoneDetailDto phoneDetailDto) {
