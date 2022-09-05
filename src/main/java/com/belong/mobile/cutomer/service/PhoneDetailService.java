@@ -1,12 +1,22 @@
 package com.belong.mobile.cutomer.service;
 
+import com.belong.mobile.common.PaginationUtil;
+import com.belong.mobile.cutomer.domain.Customer;
 import com.belong.mobile.cutomer.domain.PhoneDetail;
+import com.belong.mobile.cutomer.dto.CustomerDto;
 import com.belong.mobile.cutomer.dto.PhoneDetailDto;
+import com.belong.mobile.cutomer.dto.SearchCriteria;
 import com.belong.mobile.cutomer.dto.StatusUpdateDto;
 import com.belong.mobile.cutomer.repository.PhoneDetailRepository;
+import com.belong.mobile.cutomer.specification.PhoneSpecification;
 import com.belong.mobile.exception.NotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +33,32 @@ public class PhoneDetailService {
 
     @Autowired
     private ModelMapper modelMapper;
+
+
+    public ResponseEntity<List<PhoneDetailDto>> getAll(Long id, SearchCriteria searchCriteria) {
+        PageRequest pageRequest = PaginationUtil.buildPageRequest(
+                searchCriteria.getPage(),
+                searchCriteria.getSize(),
+                searchCriteria.getSortBy(),
+                searchCriteria.getSortDirection()
+        );
+        PhoneDetail pd = new PhoneDetail();
+        pd.setCustomerId(id);
+
+        PhoneSpecification phoneSpecification = new PhoneSpecification(pd);
+
+        Page<PhoneDetail> phoneDetails = phoneDetailRepository.findAll(phoneSpecification, pageRequest);
+        HttpHeaders httpHeader = PaginationUtil.generatePaginationHttpHeaders(phoneDetails);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .headers(httpHeader)
+                .body(
+                        phoneDetails.stream()
+                                .map(customer -> modelMapper.map(customer, PhoneDetailDto.class))
+                                .collect(Collectors.toList())
+                );
+    }
+
 
 
     public List<PhoneDetail> findByCustomerId(Long customerId) {
@@ -79,7 +115,11 @@ public class PhoneDetailService {
     }
 
 
+
+
     private PhoneDetail convertToPhoneDetail(PhoneDetailDto phoneDetailDto) {
         return modelMapper.map(phoneDetailDto, PhoneDetail.class);
     }
+
+
 }

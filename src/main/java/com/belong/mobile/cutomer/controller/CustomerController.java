@@ -61,7 +61,6 @@ public class CustomerController {
         return customerService.updateCustomer(id, customerDto);
     }
 
-
     @DeleteMapping("/customers/{id}")
     @Operation(
             summary = "Delete existing customer by id",
@@ -70,17 +69,5 @@ public class CustomerController {
         customerService.deleteById(id);
     }
 
-
-    @PatchMapping("/customers/{id}/phone-details/{phoneDetailId}/status")
-    @Operation(
-            summary = "Activate or Inactivate Phone number for customer",
-            description = "Activate or Inactivate Phone number for customer")
-    public PhoneDetailDto updatePhoneStatus(
-            @PathVariable @NotNull Long id,
-            @PathVariable @NotNull Long phoneDetailId,
-            @Valid @RequestBody StatusUpdateDto status
-    ) {
-        return customerService.updatePhoneStatus(id, phoneDetailId, status);
-    }
 
 }
