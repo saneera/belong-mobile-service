@@ -21,7 +21,7 @@ public class PhoneDetailService {
     @Autowired
     private PhoneDetailRepository phoneDetailRepository;
 
-       @Autowired
+    @Autowired
     private ModelMapper modelMapper;
 
 
@@ -34,6 +34,7 @@ public class PhoneDetailService {
         }
     }
 
+    @Transactional
     public void saveAll(List<PhoneDetailDto> phoneDetails, Long customerId) {
         phoneDetailRepository.saveAll(phoneDetails.stream().map(row -> {
             PhoneDetail details = convertToPhoneDetail(row);
@@ -42,10 +43,11 @@ public class PhoneDetailService {
         }).collect(Collectors.toList()));
     }
 
+    @Transactional
     public void replacePhoneDetails(Long customerId, List<PhoneDetailDto> phoneDetails) {
         Optional<List<PhoneDetail>> existing = phoneDetailRepository.findByCustomerId(customerId);
-        if(phoneDetails == null || (phoneDetails != null && phoneDetails.isEmpty())) {
-            if(existing.isPresent() && !existing.get().isEmpty() ){
+        if (phoneDetails == null || (phoneDetails != null && phoneDetails.isEmpty())) {
+            if (existing.isPresent() && !existing.get().isEmpty()) {
                 phoneDetailRepository.deleteAll(existing.get());
             }
         } else {
@@ -54,10 +56,10 @@ public class PhoneDetailService {
                 return convertToPhoneDetail(phoneDetail);
             }).collect(Collectors.toList());
 
-            List<PhoneDetail> removePhoneDetails = existing.get().stream().filter(row -> newPhoneDetails.stream().anyMatch(newPhone -> newPhone.getId()!=row.getId()))
+            List<PhoneDetail> removePhoneDetails = existing.get().stream().filter(row -> newPhoneDetails.stream().anyMatch(newPhone -> newPhone.getId() != row.getId()))
                     .collect(Collectors.toList());
 
-            if(!removePhoneDetails.isEmpty()) {
+            if (!removePhoneDetails.isEmpty()) {
                 phoneDetailRepository.deleteAll(removePhoneDetails);
                 phoneDetailRepository.flush();
             }

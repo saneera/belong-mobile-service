@@ -8,7 +8,6 @@ import com.belong.mobile.cutomer.dto.PhoneDetailDto;
 import com.belong.mobile.cutomer.dto.SearchCriteria;
 import com.belong.mobile.cutomer.dto.StatusUpdateDto;
 import com.belong.mobile.cutomer.repository.CustomerRepository;
-import com.belong.mobile.cutomer.repository.PhoneDetailRepository;
 import com.belong.mobile.exception.NotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
