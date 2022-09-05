@@ -2,6 +2,8 @@ package com.belong.mobile.cutomer.dto;
 
 import com.belong.mobile.cutomer.domain.Status;
 
+import javax.validation.constraints.NotEmpty;
+
 
 public class PhoneDetailDto {
 
@@ -9,8 +11,10 @@ public class PhoneDetailDto {
 
     private Long customerId;
 
+    @NotEmpty
     private String phoneNumber;
 
+    @NotEmpty
     private Status status;
 
     public Long getId() {

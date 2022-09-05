@@ -40,3 +40,80 @@ The app defines following CRUD APIs.
 ```bash
 Gradle: ./gradlew clean test
 ```
+
+
+### Curl Command
+
+#### Get All Customer
+
+``` bash
+curl -X 'GET' \
+  'http://localhost:8080/api/v1/customers?page=0&size=5' \
+  -H 'accept: */*'
+```
+
+
+#### Add Customer
+``` bash
+curl -X 'POST' \
+  'http://localhost:8080/api/v1/customers' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "firstName": "<first_name>",
+  "lastName": "<last_name>",
+  "phoneDetails": [   
+ {
+      "phoneNumber": "<phone_number>",
+      "status": "Active"
+    }
+  ]
+}'
+```
+
+#### Get Specific Customer
+``` bash
+curl -X 'GET' \
+  'http://localhost:8080/api/v1/customers/1' \
+  -H 'accept: */*'
+```
+
+
+#### Update Specific Customer first Name and Last Name
+``` bash
+curl -X 'PUT' \
+  'http://localhost:8080/api/v1/customers/1' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "id": 1,
+  "firstName": "<Updated_first_name>",
+  "lastName": "<Updated_last_name>"
+  
+```
+
+
+#### Activate Phone Number
+
+``` bash
+curl -X 'PATCH' \
+  'http://localhost:8080/api/v1/customers/1/phone-details/1/status' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "status": "Active"
+}'
+```
+
+#### Inactivate Phone Number
+
+``` bash
+curl -X 'PATCH' \
+  'http://localhost:8080/api/v1/customers/1/phone-details/1/status' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "status": "Inactive"
+}'
+```
+

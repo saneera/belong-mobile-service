@@ -15,4 +15,5 @@ public interface PhoneDetailRepository extends JpaRepository<PhoneDetail, Long> 
 
     @Query("select p  from PhoneDetail as p  where p.customerId = :customerId order by p.id")
     Optional<List<PhoneDetail>> findByCustomerId(Long customerId);
+
 }

@@ -1,5 +1,6 @@
 package com.belong.mobile.cutomer.dto;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.List;
 
@@ -8,8 +9,10 @@ public class CustomerDto implements Serializable {
 
     private Integer id;
 
+    @NotEmpty
     private String firstName;
 
+    @NotEmpty
     private String lastName;
 
     private List<PhoneDetailDto> phoneDetails;

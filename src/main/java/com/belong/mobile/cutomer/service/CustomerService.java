@@ -99,8 +99,33 @@ public class CustomerService {
         Customer customer = customerRepository.findById(id).orElseThrow(() -> new NotFoundException("Not found Customer with id = " + id));
         BeanUtils.copyProperties(customerDto, customer, "id", "version");
         customerRepository.save(customer);
+
+        Optional<List<PhoneDetail>> existing = phoneDetailRepository.findByCustomerId(customer.getId());
+        if(customerDto.getPhoneDetails() == null || (customerDto.getPhoneDetails() != null && customerDto.getPhoneDetails().isEmpty())) {
+            if(existing.isPresent() && !existing.get().isEmpty() ){
+                phoneDetailRepository.deleteAll(existing.get());
+            }
+        } else {
+
+            List<PhoneDetail> newPhoneDetails = customerDto.getPhoneDetails().stream().map(phoneDetails -> {
+                return convertToPhoneDetail(phoneDetails);
+            }).collect(Collectors.toList());
+
+            List<PhoneDetail> removePhoneDetails = existing.get().stream().filter(row -> newPhoneDetails.stream().anyMatch(newPhone -> newPhone.getId()!=row.getId()))
+                    .collect(Collectors.toList());
+
+            if(!removePhoneDetails.isEmpty()) {
+                phoneDetailRepository.deleteAll(removePhoneDetails);
+                phoneDetailRepository.flush();
+            }
+            phoneDetailRepository.saveAll(newPhoneDetails);
+        }
+
         return convertToCustomerDto(customer);
     }
+
+
+
 
     private CustomerDto convertToCustomerDto(Customer customer) {
         CustomerDto customerDto = modelMapper.map(customer, CustomerDto.class);
