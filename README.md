@@ -41,6 +41,10 @@ The app defines following CRUD APIs.
 Gradle: ./gradlew clean test
 ```
 
+### Integration Test
+ Integration Test located on src/test/java/karate
+
+
 
 ### Curl Command
 
