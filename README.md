@@ -28,12 +28,13 @@ The app defines following CRUD APIs.
 
 #### Swagger URL : http://localhost:8080/swagger-ui/index.html
 
-| Method | Url                                                         | Decription                                   | 
-|--------|-------------------------------------------------------------|----------------------------------------------| 
-| POST   | /api/v1/customers                                           | Create Customer                              |
-| GET    | /api/v1/customers                                           | Get Customers                                | 
-| GET    | /api/v1/customers/{id}                                      | Get Customers By cusromer Id                 | 
-| PATCH  | /api/v1/customers/{id}/phone-details/{phoneDetailId}/status | Activate Or Decativate Customer Phone Number |
+| Method | Url                                                         | Decription                                  | 
+|--------|-------------------------------------------------------------|---------------------------------------------| 
+| POST   | /api/v1/customers                                           | Create Customer                             |
+| GET    | /api/v1/customers                                           | Get Customers                               | 
+| GET    | /api/v1/customers/{id}                                      | Get Customers By cusromer Id                | 
+| PATCH  | /api/v1/customers/{id}/phone-details/{phoneDetailId}/status | Activate Or Decativate Customer Phone Number|
+| GET    | /api/v1/customers/{id}/phone-details                        | Get all Phone numbers for customer          |
 
 
 ### Running tests 
@@ -119,5 +120,13 @@ curl -X 'PATCH' \
   -d '{
   "status": "Inactive"
 }'
+```
+
+#### Get All Phone Numbers for customer
+
+``` bash
+curl -X 'GET' \
+  'http://localhost:8080/api/v1/customers/1/phone-details?page=0&size=10' \
+  -H 'accept: */*'
 ```
 
