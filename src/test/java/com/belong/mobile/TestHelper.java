@@ -56,7 +56,7 @@ public class TestHelper {
         customerDto.setFirstName("John");
         customerDto.setLastName("Wick");
         customerDto.setId(1);
-        customerDto.setPhoneDetails(null);
+        customerDto.setPhoneDetails(Arrays.asList(buildPhoneDetailDto(1L, 1L, Status.Active)));
         return customerDto;
     }
 }

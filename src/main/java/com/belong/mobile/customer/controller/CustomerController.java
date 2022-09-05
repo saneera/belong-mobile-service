@@ -24,7 +24,7 @@ public class CustomerController {
 
     @PostMapping("/customers")
     @Operation(
-            summary = "Create Cstomer",
+            summary = "Create Customer",
             description = "Returns the saved Customer ")
     public CustomerDto createCustomer(@Valid @RequestBody CustomerDto customer) {
         return customerService.save(customer);

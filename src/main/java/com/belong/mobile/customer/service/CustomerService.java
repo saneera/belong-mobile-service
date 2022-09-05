@@ -49,7 +49,7 @@ public class CustomerService {
         Page<Customer> customers = customerRepository.findAll(pageRequest);
         HttpHeaders httpHeader = PaginationUtil.generatePaginationHttpHeaders(customers);
         return ResponseEntity
-                .status(HttpStatus.OK)
+                .status(HttpStatus.CREATED)
                 .headers(httpHeader)
                 .body(
                         customers.stream()
