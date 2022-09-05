@@ -32,7 +32,8 @@ public class CustomerService {
     private CustomerRepository customerRepository;
 
     @Autowired
-    private PhoneDetailRepository phoneDetailRepository;
+    PhoneDetailService phoneDetailService;
+
 
     @Autowired
     private ModelMapper modelMapper;
@@ -70,11 +71,7 @@ public class CustomerService {
     public CustomerDto save(CustomerDto customerDto) {
         Customer customer = customerRepository.save(convertToCustomer(customerDto));
         if (Optional.of(customerDto.getPhoneDetails()).isPresent()) {
-            phoneDetailRepository.saveAll(customerDto.getPhoneDetails().stream().map(row -> {
-                PhoneDetail details = convertToPhoneDetail(row);
-                details.setCustomerId(customer.getId());
-                return details;
-            }).collect(Collectors.toList()));
+            phoneDetailService.saveAll(customerDto.getPhoneDetails(), customer.getId());
         }
         return convertToCustomerDto(customer);
     }
@@ -85,68 +82,34 @@ public class CustomerService {
     }
 
     @Transactional
-    public PhoneDetailDto updatePhoneStatus(Long customerId, Long phoneId, StatusUpdateDto status) {
-        PhoneDetail phoneNumber = phoneDetailRepository.findByIdAndCustomerId(phoneId, customerId)
-                .orElseThrow(() -> new NotFoundException("Not found Phone with id = " + phoneId));
-
-        phoneNumber.setStatus(status.getStatus());
-        phoneNumber = phoneDetailRepository.save(phoneNumber);
-        return modelMapper.map(phoneNumber, PhoneDetailDto.class);
-    }
-
-    @Transactional
     public CustomerDto updateCustomer(Long id, CustomerDto customerDto) {
         Customer customer = customerRepository.findById(id).orElseThrow(() -> new NotFoundException("Not found Customer with id = " + id));
         BeanUtils.copyProperties(customerDto, customer, "id", "version");
         customerRepository.save(customer);
-
-        Optional<List<PhoneDetail>> existing = phoneDetailRepository.findByCustomerId(customer.getId());
-        if(customerDto.getPhoneDetails() == null || (customerDto.getPhoneDetails() != null && customerDto.getPhoneDetails().isEmpty())) {
-            if(existing.isPresent() && !existing.get().isEmpty() ){
-                phoneDetailRepository.deleteAll(existing.get());
-            }
-        } else {
-
-            List<PhoneDetail> newPhoneDetails = customerDto.getPhoneDetails().stream().map(phoneDetails -> {
-                return convertToPhoneDetail(phoneDetails);
-            }).collect(Collectors.toList());
-
-            List<PhoneDetail> removePhoneDetails = existing.get().stream().filter(row -> newPhoneDetails.stream().anyMatch(newPhone -> newPhone.getId()!=row.getId()))
-                    .collect(Collectors.toList());
-
-            if(!removePhoneDetails.isEmpty()) {
-                phoneDetailRepository.deleteAll(removePhoneDetails);
-                phoneDetailRepository.flush();
-            }
-            phoneDetailRepository.saveAll(newPhoneDetails);
-        }
-
+        phoneDetailService.replacePhoneDetails(id, customerDto.getPhoneDetails());
         return convertToCustomerDto(customer);
     }
 
-
+    public PhoneDetailDto updatePhoneStatus(Long customerId, Long phoneId, StatusUpdateDto status) {
+        return phoneDetailService.updatePhoneStatus(customerId, phoneId, status);
+    }
 
 
     private CustomerDto convertToCustomerDto(Customer customer) {
         CustomerDto customerDto = modelMapper.map(customer, CustomerDto.class);
-        Optional<List<PhoneDetail>> phoneDetailsList = phoneDetailRepository.findByCustomerId(customer.getId());
-        if (phoneDetailsList.isPresent()) {
-            List<PhoneDetailDto> phoneDetails = phoneDetailsList.get().stream().map(row -> {
+        List<PhoneDetail> phoneDetailsList = phoneDetailService.findByCustomerId(customer.getId());
+        if (phoneDetailsList != null) {
+            List<PhoneDetailDto> phoneDetails = phoneDetailsList.stream().map(row -> {
                 return modelMapper.map(row, PhoneDetailDto.class);
             }).collect(Collectors.toList());
             customerDto.setPhoneDetails(phoneDetails);
         } else {
             customerDto.setPhoneDetails(null);
         }
-
         return customerDto;
     }
 
     private Customer convertToCustomer(CustomerDto customerDto) {
         return modelMapper.map(customerDto, Customer.class);
-    }
-
-    private PhoneDetail convertToPhoneDetail(PhoneDetailDto phoneDetailDto) {
-        return modelMapper.map(phoneDetailDto, PhoneDetail.class);
     }
 }

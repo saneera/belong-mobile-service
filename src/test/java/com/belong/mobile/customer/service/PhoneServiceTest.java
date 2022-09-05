@@ -32,16 +32,11 @@ import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
-public class CustomerServiceTest {
+public class PhoneServiceTest {
 
     @InjectMocks
-    CustomerService customerService;
-
-    @Mock
-    CustomerRepository customerRepository;
-
-    @Mock
     PhoneDetailService phoneDetailService;
+
 
     @Mock
     PhoneDetailRepository phoneDetailRepository;
@@ -55,38 +50,19 @@ public class CustomerServiceTest {
     }
 
 
-    @DisplayName("Get All Customer Test")
+    @DisplayName("Activate Customer Phone")
     @Test
-    public void getCustomerList() {
-        SearchCriteria searchCriteria = buildSearchCriteria();
-        PageRequest pageRequest = PaginationUtil.buildPageRequest(
-                searchCriteria.getPage(),
-                searchCriteria.getSize(),
-                searchCriteria.getSortBy(),
-                searchCriteria.getSortDirection()
-        );
-
-        Page<Customer> pro = Mockito.mock(Page.class);
-        Mockito.when(customerRepository.findAll(pageRequest)).thenReturn(pro);
+    public void activateCustomerPhone() {
+        PhoneDetail phoneDetail = buildPhoneDetails(1L, 1L, Status.Inactive);
+        Mockito.when(phoneDetailRepository.findByIdAndCustomerId(1L, 1L)).thenReturn(Optional.of(phoneDetail));
+        PhoneDetail phoneDetailActive = buildPhoneDetails(1L, 1L, Status.Active);
+        Mockito.when(phoneDetailRepository.save(phoneDetailActive)).thenReturn(phoneDetail);
+        when(modelMapper.map(phoneDetail, PhoneDetailDto.class)).thenReturn(buildPhoneDetailDto(1L, 1L, Status.Active));
+        StatusUpdateDto status =new StatusUpdateDto();
+        status.setStatus(Status.Active);
         //test
-        customerService.getAll(searchCriteria);
-        verify(customerRepository, times(1)).findAll(pageRequest);
+        phoneDetailService.updatePhoneStatus(1L, 1L, status);
+        verify(phoneDetailRepository, times(1)).findByIdAndCustomerId(1L, 1L);
     }
-
-    @DisplayName("Get Customer By Id Test")
-    @Test
-    public void getCustomerById() {
-        Customer customerOne = buildCustomer();
-        Mockito.when(customerRepository.findById(1L)).thenReturn(Optional.of(customerOne));
-        Mockito.when(phoneDetailService.findByCustomerId(1L)).thenReturn(null);
-        when(modelMapper.map(customerOne, CustomerDto.class)).thenReturn(buildCustomerDto());
-        //test
-        customerService.findById(1L);
-        verify(customerRepository, times(1)).findById(1L);
-        verify(phoneDetailService, times(1)).findByCustomerId(1L);
-    }
-
-
-
 
 }
