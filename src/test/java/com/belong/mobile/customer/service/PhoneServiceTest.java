@@ -1,10 +1,14 @@
 package com.belong.mobile.customer.service;
 
+import com.belong.mobile.common.PaginationUtil;
+import com.belong.mobile.customer.domain.Customer;
 import com.belong.mobile.customer.domain.PhoneDetail;
 import com.belong.mobile.customer.domain.Status;
 import com.belong.mobile.customer.dto.PhoneDetailDto;
+import com.belong.mobile.customer.dto.SearchCriteria;
 import com.belong.mobile.customer.dto.StatusUpdateDto;
 import com.belong.mobile.customer.repository.PhoneDetailRepository;
+import com.belong.mobile.customer.specification.PhoneSpecification;
 import cucumber.api.java.Before;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +19,12 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.ResponseEntity;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.belong.mobile.TestHelper.*;

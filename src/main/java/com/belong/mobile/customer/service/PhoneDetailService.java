@@ -42,7 +42,6 @@ public class PhoneDetailService {
         );
         PhoneDetail pd = new PhoneDetail();
         pd.setCustomerId(id);
-
         PhoneSpecification phoneSpecification = new PhoneSpecification(pd);
 
         Page<PhoneDetail> phoneDetails = phoneDetailRepository.findAll(phoneSpecification, pageRequest);
